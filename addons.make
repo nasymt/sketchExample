@@ -1,0 +1,3 @@
+ofxGui
+ofxPDF
+ofxXmlSettings
