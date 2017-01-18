@@ -18,7 +18,6 @@
 //
 //====================================================================
 class meshExample001 : public sketchBaseScene {
-   public:
     void begin() { mesh = new ofMesh(); }
 
     void update() {}
@@ -68,6 +67,9 @@ class meshExample001 : public sketchBaseScene {
 
     void end() { delete mesh; }
 
+   public:
+    meshExample001(string name) { sceneName = name; };
+
    private:
     ofMesh *mesh;
 };
@@ -78,7 +80,6 @@ class meshExample001 : public sketchBaseScene {
 //
 //====================================================================
 class vboExample001 : public sketchBaseScene {
-   public:
     void begin() {
         mesh = new ofMesh();
         myVbo = new ofVbo();
@@ -109,6 +110,9 @@ class vboExample001 : public sketchBaseScene {
         delete myVbo;
     }
 
+   public:
+    vboExample001(string name) { sceneName = name; };
+
    private:
     static const int NUM_PARTICLES = 50000;
     ofVec3f vertex[NUM_PARTICLES];
@@ -122,7 +126,6 @@ class vboExample001 : public sketchBaseScene {
 //
 //====================================================================
 class vboExample002 : public sketchBaseScene {
-   public:
     void begin() {
         mesh = new ofMesh();
         myVbo = new ofVbo();
@@ -147,7 +150,6 @@ class vboExample002 : public sketchBaseScene {
 
     void draw() {
         ofSetColor(255);
-        ofDrawAxis(50);
         glPointSize(sin(ofGetElapsedTimef()) * 4.0);
         myVbo->draw(GL_POINTS, 0, NUM_PARTICLES);
     }
@@ -156,6 +158,9 @@ class vboExample002 : public sketchBaseScene {
         delete mesh;
         delete myVbo;
     }
+
+   public:
+    vboExample002(string name) { sceneName = name; };
 
    private:
     static const int NUM_PARTICLES = 50000;
@@ -172,7 +177,6 @@ class vboExample002 : public sketchBaseScene {
 //
 //====================================================================
 class vboMeshExample001 : public sketchBaseScene {
-   public:
     void begin() {
         vboMesh = new ofVboMesh();
 
@@ -199,9 +203,10 @@ class vboMeshExample001 : public sketchBaseScene {
         vboMesh->drawWireframe();
     }
 
-    void end() {
-        delete vboMesh;
-    }
+    void end() { delete vboMesh; }
+
+public:
+    vboMeshExample001(string name) { sceneName = name; };
 
    private:
     static const int NUM_PARTICLES = 50000;

@@ -1,0 +1,10 @@
+<sceneList>
+    
+    <scene>
+        <path>xml/scene/example/polylineExample.xml</path>
+    </scene><!---->
+    
+    <scene>
+        <path>xml/scene/sceneParameters.xml</path>
+    </scene>
+</sceneList>

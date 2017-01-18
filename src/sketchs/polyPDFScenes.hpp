@@ -15,6 +15,7 @@
 #include "PolyManagementPDFVertices.hpp"
 #include "simpleCounter.hpp"
 #include "simplePDFVertices.hpp"
+#include "QuaternionManagement.hpp"
 
 //====================================================================
 //
@@ -71,6 +72,8 @@ class polyPDFScene001 : public sketchBaseScene {
     }
 
    public:
+    polyPDFScene001(string name) { sceneName = name; };
+
    private:
     ofxPDF *pdf;
     ofPolyline *poly;
@@ -84,7 +87,7 @@ class polyPDFScene001 : public sketchBaseScene {
 //====================================================================
 class polyPDFScene002 : public sketchBaseScene {
     void begin() {
-        ofLogNotice("polyPDFScene001 :: begin");
+        ofLogNotice("polyPDFScene002 :: begin");
         pdf = new ofxPDF();
         pdf_small = new ofxPDF();
         poly = new ofPolyline();
@@ -140,10 +143,14 @@ class polyPDFScene002 : public sketchBaseScene {
 
     void end() {
         delete pdf;
+        delete pdf_small;
         delete poly;
+        delete counter;
     }
 
    public:
+    polyPDFScene002(string name) { sceneName = name; };
+
    private:
     ofxPDF *pdf;
     ofxPDF *pdf_small;
@@ -163,7 +170,7 @@ class polyPDFScene002 : public sketchBaseScene {
 //====================================================================
 class polyPDFScene003 : public sketchBaseScene {
     void begin() {
-        ofLogNotice("polyPDFScene001 :: begin");
+        ofLogNotice("polyPDFScene003:: begin");
         pdf = new ofxPDF();
         pdf_small = new ofxPDF();
         poly = new ofPolyline();
@@ -230,10 +237,15 @@ class polyPDFScene003 : public sketchBaseScene {
 
     void end() {
         delete pdf;
+        delete pdf_small;
         delete poly;
+//        delete _poly;
+        delete counter;
     }
 
    public:
+    polyPDFScene003(string name) { sceneName = name; };
+
    private:
     ofxPDF *pdf;
     ofxPDF *pdf_small;
@@ -314,10 +326,14 @@ class polyPDFScene004 : public sketchBaseScene {
 
     void end() {
         delete pdf;
+        delete pdf_small;
         delete poly;
+        delete counter;
     }
 
    public:
+    polyPDFScene004(string name) { sceneName = name; };
+
    private:
     ofxPDF *pdf;
     ofxPDF *pdf_small;
@@ -411,6 +427,8 @@ class polyPDFScene005 : public sketchBaseScene {
     }
 
    public:
+    polyPDFScene005(string name) { sceneName = name; };
+
    private:
     ofxPDF *pdf;
     ofxPDF *pdf_small;
@@ -423,6 +441,77 @@ class polyPDFScene005 : public sketchBaseScene {
     int circleNum;
 
     // int counter = 0;
+};
+
+//====================================================================
+//
+// polyPDFScene006 [simple Quaternion Example]
+//
+//====================================================================
+class polyPDFScene006 : public sketchBaseScene {
+    void begin() {
+        simplePDF = new simplePDFVertices();
+        simplePDF2 = new simplePDFVertices();
+        poly = new ofPolyline();
+        simplePDF->setup("pdf/example_ellipse_400px.pdf", 20);
+        simplePDF2->setup("pdf/example_ellipse_400px.pdf", 20);
+        ofBackground(0);
+
+        if (vertices.size()) vertices.clear();
+
+        //        simplePDF->rotate(0,0,0);
+        vertices = simplePDF->getVertices();
+    }
+
+    void update() {}
+
+    void draw() {
+        ofSetColor(255);
+
+        for (int i = 0; i < vertices.size(); i++) {
+            poly->begin();
+
+            //            ofSetColor(255, 0, 0);
+            //            ofDrawBox(vertices[i].x, vertices[i].y, vertices[i].z, 5);
+            for (int j = 0; j < vertices.size(); j++) {
+                ofPoint transPoint = ofPoint(vertices[i].x, vertices[i].y, vertices[i].z);
+
+                ofSetColor(255, 255, 0);
+                ofDrawBox(transPoint.x, transPoint.y, transPoint.z, 5);
+                ofSetColor(255, 0, 0);
+                //                simplePDF2->rotate(j, 0, 0, 360 / vertices.size() * i);
+                //                simplePDF2->rotate(sin(ofGetElapsedTimef())*360, 0, 0);
+                ofPoint vert2 = simplePDF2->getVertices(j);
+                ofPoint point = (vert2 * ratio_1) + transPoint;
+                ofPushMatrix();
+                ofTranslate(point.x, point.y, point.z);
+                ofDrawAxis(10);
+                ofPopMatrix();
+                ofDrawBox(point.x, point.y, point.z, 5);
+            }
+
+            poly->addVertex(ofPoint(vertices[i].x, vertices[i].y, vertices[i].z));
+        }
+        poly->end();
+        poly->draw();
+        poly->clear();
+    }
+
+    void end() {
+        delete poly;
+        delete simplePDF;
+        delete simplePDF2;
+    }
+
+   public:
+    polyPDFScene006(string name) { sceneName = name; };
+
+   private:
+    ofPolyline *poly;
+    simplePDFVertices *simplePDF;
+    simplePDFVertices *simplePDF2;
+    vector<ofPoint> vertices;
+    vector<vector<ofPoint>> vertices2;
 };
 
 //====================================================================
@@ -443,7 +532,7 @@ class simplePDFVerticesExample001 : public sketchBaseScene {
     void draw() {
         ofSetColor(255);
 
-        vector<ofVec2f> point = simplePDF->getVertices();
+        vector<ofPoint> point = simplePDF->getVertices();
 
         for (int i = 0; i < point.size(); i++) {
             poly->begin();
@@ -467,9 +556,196 @@ class simplePDFVerticesExample001 : public sketchBaseScene {
     }
 
    public:
+    simplePDFVerticesExample001(string name) { sceneName = name; };
+
    private:
     ofPolyline *poly;
     simplePDFVertices *simplePDF;
+};
+
+//====================================================================
+//
+// simplePDFVerticesExample002 [simple Quaternion Example]
+//
+//====================================================================
+class simplePDFVerticesExample002 : public sketchBaseScene {
+    void begin() {
+        simplePDF = new simplePDFVertices();
+        poly = new ofPolyline();
+        simplePDF->setup("pdf/example_ellipse_400px.pdf", 20);
+        ofBackground(0);
+
+        if (vertices.size()) vertices.clear();
+    }
+
+    void update() {
+        //        simplePDF->rotate(90, sin(ofGetElapsedTimef()) * 360, cos(ofGetElapsedTimef()) * 360);
+        simplePDF->rotate(0, 0, 90);
+        vertices = simplePDF->getVertices();
+    }
+
+    void draw() {
+        ofSetColor(255);
+
+        for (int i = 0; i < vertices.size(); i++) {
+            poly->begin();
+
+            if (i == 0) {
+                ofSetColor(255, 0, 0);
+            } else if (i == vertices.size() / 2) {
+                ofSetColor(255, 255, 0);
+            } else {
+                ofSetColor(0, 255, 255);
+            }
+
+            ofDrawBox(vertices[i].x, vertices[i].y, vertices[i].z, 5);
+            //            ofPushMatrix();
+            //            ofTranslate(simplePDF->getVertices()[i]);
+            //            ofRotateX(90);
+            //            ofSetColor(0, 0, 255);
+            //            ofDrawBox(vertices[i].x, vertices[i].y, vertices[i].z, 5);
+            //            ofPopMatrix();
+
+            poly->addVertex(ofPoint(vertices[i].x, vertices[i].y, vertices[i].z));
+        }
+        poly->end();
+        poly->draw();
+        poly->clear();
+    }
+
+    void end() {
+        delete poly;
+        delete simplePDF;
+    }
+
+   public:
+    simplePDFVerticesExample002(string name) { sceneName = name; };
+
+   private:
+    ofPolyline *poly;
+    simplePDFVertices *simplePDF;
+    vector<ofPoint> vertices;
+};
+
+//====================================================================
+//
+// simplePDFVerticesExample003 [simple polyPDF Example]
+//
+//====================================================================
+class simplePDFVerticesExample003 : public sketchBaseScene {
+    void begin() {
+        simplePDF = new simplePDFVertices();
+        poly = new ofPolyline();
+        qManagement = new QuaternionManagement();
+        simplePDF->setup("pdf/example_ellipse_400px.pdf", 20);
+        ofBackground(0);
+    }
+
+    void update() {}
+
+    void draw() {
+        ofSetColor(255);
+
+        vector<ofPoint> point;
+        float rotateX = 90;
+        float rotateY = sin(ofGetElapsedTimef()) * 360;
+        float rotateZ = 180;
+        float quaternionAngle = qManagement->getQuaternionAngle(rotateX, rotateY, rotateZ);
+        ofVec3f quaternionAxis = qManagement->getQuaternionAxis(rotateX, rotateY, rotateZ);
+
+        for (int i = 0; i < simplePDF->getVertices().size(); i++) {
+            poly->begin();
+            ofPoint pos = qManagement->getPosition(ofPoint(simplePDF->getVertices()[i].x + 1000, simplePDF->getVertices()[i].y, 0), quaternionAngle, quaternionAxis);
+            point.push_back(pos);
+
+            ofSetColor(255, 0, 0);
+            ofDrawBox(point[i].x, point[i].y, point[i].z, 5);
+            //            ofDrawCircle(point[i].x, point[i].y, 5);
+            poly->addVertex(ofPoint(point[i].x, point[i].y, point[i].z));
+
+            if (i == simplePDF->getVertices().size() - 1) {
+                poly->addVertex(ofPoint(point[0].x, point[0].y, point[0].z));
+            }
+        }
+        poly->end();
+        poly->draw();
+        poly->clear();
+    }
+
+    void end() {
+        delete poly;
+        delete simplePDF;
+        delete qManagement;
+    }
+
+   public:
+    simplePDFVerticesExample003(string name) { sceneName = name; };
+
+   private:
+    ofPolyline *poly;
+    simplePDFVertices *simplePDF;
+    QuaternionManagement *qManagement;
+};
+
+//====================================================================
+//
+// simplePDFVerticesExample004 [simple polyPDF Example]
+//
+//====================================================================
+class simplePDFVerticesExample004 : public sketchBaseScene {
+    void begin() {
+        simplePDF = new simplePDFVertices();
+        poly = new ofPolyline();
+        counter = new simpleCounter();
+        simplePDF->setup("pdf/example_ellipse_400px.pdf", 100);
+        simplePDF->rotate(90, 0, 0);
+        counter->setup(0, 9, 0.5);
+    }
+
+    void update() {
+        counter->changeCountAmount(0.5 * speed);
+        counter->update();
+    }
+
+    void draw() {
+        ofSetColor(255);
+
+        vector<ofPoint> point = simplePDF->getVertices();
+        int vertNum = point.size();
+
+        for (int i = 0; i < simplePDF->getVertices().size(); i++) {
+            poly->begin();
+
+            ofSetColor(255, 0, 0);
+            for (int j = 0; j < simplePDF->getVertices().size(); j++) {
+                if (j == counter->getValue()) {
+                    ofDrawBox(point[j].x, point[j].y + vertNum * 10 * i + 10 * j, point[j].z, 5);
+                    poly->addVertex(ofPoint(point[i].x, point[i].y + vertNum * 10 * i + 10 * j, point[i].z));
+
+                    //            if (i == simplePDF->getVertices().size() - 1) {
+                    //                poly->addVertex(ofPoint(point[0].x, point[0].y, point[0].z));
+                    //            }
+                }
+            }
+        }
+        poly->end();
+        poly->draw();
+        poly->clear();
+    }
+
+    void end() {
+        delete poly;
+        delete simplePDF;
+        delete counter;
+    }
+
+   public:
+    simplePDFVerticesExample004(string name) { sceneName = name; };
+
+   private:
+    ofPolyline *poly;
+    simplePDFVertices *simplePDF;
+    simpleCounter *counter;
 };
 
 #endif /* polyPDFScenes_hpp */

@@ -1,0 +1,23 @@
+<sceneParameters>
+    <scene>
+        <name>polylineExample001</name>
+        <speed>1.700000048</speed>
+        <elementInterval>1.000000000</elementInterval>
+        <ratio_1>1.000000000</ratio_1>
+        <ratio_2>1.000000000</ratio_2>
+    </scene>
+    <scene>
+        <name>polylineExample002</name>
+        <speed>1.0</speed>
+        <elementInterval>1.0</elementInterval>
+        <ratio_1>1.0</ratio_1>
+        <ratio_2>1.0</ratio_2>
+    </scene>
+    <scene>
+        <name>polylineExample003</name>
+        <speed>0.5</speed>
+        <elementInterval>1.0</elementInterval>
+        <ratio_1>1.0</ratio_1>
+        <ratio_2>1.0</ratio_2>
+    </scene>
+</sceneParameters>

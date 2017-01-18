@@ -18,10 +18,7 @@
 //
 //====================================================================
 class polylineExample001 : public sketchBaseScene {
-   public:
-    void setup() {
-        ofLogNotice("polylineExample001 :: setup");
-    }
+    void setup() { ofLogNotice("polylineExample001 :: setup"); }
 
     void begin() {
         poly = new ofPolyline();
@@ -42,10 +39,11 @@ class polylineExample001 : public sketchBaseScene {
         // ofDrawEllipse(0, 0, 200, 200);
         poly->draw();
     }
-    
-    void end(){
-        delete poly;
-    }
+
+    void end() { delete poly; }
+
+   public:
+    polylineExample001(string name) { sceneName = name; };
 
    private:
     ofPolyline *poly;
@@ -57,20 +55,17 @@ class polylineExample001 : public sketchBaseScene {
 //
 //====================================================================
 class polylineExample002 : public sketchBaseScene {
-   public:
     void setup() { ofLogNotice("polylineExample002 :: setup"); }
-    void begin() {
-        ofLogNotice("polylineExample002 :: begin");
-    }
+    void begin() { ofLogNotice("polylineExample002 :: begin"); }
     void update() {
         // make a pentagon
-        if(verts.size()) verts.clear();
+        if (verts.size()) verts.clear();
         p.clear();
         float size = 400.f;
-        float X1 = 0.125*sqrt(10 + 2*sqrt(5)) * size * sin(ofGetElapsedTimef());
-        float X2 = 0.125*sqrt(10 - 2*sqrt(5)) * size * sin(ofGetElapsedTimef());
-        float Y1 = 0.125*(sqrt(5) - 1) * size * sin(ofGetElapsedTimef());
-        float Y2 = 0.125*(sqrt(5) + 1) * size * sin(ofGetElapsedTimef());
+        float X1 = 0.125 * sqrt(10 + 2 * sqrt(5)) * size * sin(ofGetElapsedTimef());
+        float X2 = 0.125 * sqrt(10 - 2 * sqrt(5)) * size * sin(ofGetElapsedTimef());
+        float Y1 = 0.125 * (sqrt(5) - 1) * size * sin(ofGetElapsedTimef());
+        float Y2 = 0.125 * (sqrt(5) + 1) * size * sin(ofGetElapsedTimef());
         verts.push_back(ofPoint(0, -0.5 * size * sin(ofGetElapsedTimef())));
         verts.push_back(ofPoint(-X1, -Y1));
         verts.push_back(ofPoint(-X2, Y2));
@@ -83,12 +78,13 @@ class polylineExample002 : public sketchBaseScene {
         p.draw();
     }
 
+   public:
+    polylineExample002(string name) { sceneName = name; };
+
    private:
     vector<ofPoint> verts;
     ofPolyline p;
-
 };
-
 
 //====================================================================
 //
@@ -96,30 +92,24 @@ class polylineExample002 : public sketchBaseScene {
 //
 //====================================================================
 class polylineExample003 : public sketchBaseScene {
-   public:
-    void begin() {
-        p = new ofPolyline();
-    }
+    void begin() { p = new ofPolyline(); }
     void update() {
-//        p->clear();
-//        p->begin();
-//        p->addVertex(0,0);
-//        p->addVertex(100,0);
-        p->curveTo(-300,50);
-        p->curveTo(0,-100);
-        p->curveTo(400,400);
-//        p->addVertex(200,100);
-//        p->end();
-        
-        
+        //        p->clear();
+        //        p->begin();
+        //        p->addVertex(0,0);
+        //        p->addVertex(100,0);
+        p->curveTo(-300, 50);
+        p->curveTo(0, -100);
+        p->curveTo(400, 400);
+        //        p->addVertex(200,100);
+        //        p->end();
     }
-    void draw() {
-        p->draw();
-    }
-    
-    void end(){
-        delete p;
-    }
+    void draw() { p->draw(); }
+
+    void end() { delete p; }
+
+   public:
+    polylineExample003(string name) { sceneName = name; };
 
    private:
     ofPolyline *p;

@@ -21,7 +21,6 @@
 //
 //====================================================================
 class vboMeshParticle001 : public sketchBaseScene {
-   public:
     void begin() {
         vboMesh = new ofVboMesh();
         pdf = new ofxPDF();
@@ -108,6 +107,9 @@ class vboMeshParticle001 : public sketchBaseScene {
         delete counter;
     }
 
+   public:
+    vboMeshParticle001(string name) { sceneName = name; };
+
    private:
     static const int NUM_PARTICLES = 50000;
     vector<ofVec3f> vertices;
@@ -133,7 +135,6 @@ class vboMeshParticle001 : public sketchBaseScene {
 //
 //====================================================================
 class vboMeshParticle002 : public sketchBaseScene {
-   public:
     void begin() {
         vboMesh = new ofVboMesh();
         pdf = new ofxPDF();
@@ -146,7 +147,7 @@ class vboMeshParticle002 : public sketchBaseScene {
         resample = 1000;
         circleNum = 50;
         pdf->load("pdf/example_ellipse_400px.pdf");
-//        pdf_small->load("pdf/")
+        //        pdf_small->load("pdf/")
         polyManagement->add("pdf/example_ellipse_400px.pdf", resample / 2);
     }
 
@@ -161,7 +162,6 @@ class vboMeshParticle002 : public sketchBaseScene {
     }
 
     void draw() {
-        ofDrawAxis(100);
         vector<vector<ofVec2f>> point = polyManagement->getVertices();
         float scale = 1.5;
         int poly_index = 0;
@@ -171,8 +171,8 @@ class vboMeshParticle002 : public sketchBaseScene {
             for (int j = 0; j < point[i].size(); j++) {
                 if (j % (resample / circleNum) == 0) {
                     poly->addVertex(ofVec3f(point[i][j].x, point[i][j].y, 0));
-                    ofSetColor(255,255,0);
-                    ofDrawCircle(point[i][j].x,point[i][j].y,2);
+                    ofSetColor(255, 255, 0);
+                    ofDrawCircle(point[i][j].x, point[i][j].y, 2);
                 }
             }
             poly->end();
@@ -180,7 +180,7 @@ class vboMeshParticle002 : public sketchBaseScene {
             poly->clear();
         }
         ofSetColor(255);
-//        vboMesh->draw();
+        //        vboMesh->draw();
     }
 
     void end() {
@@ -189,6 +189,9 @@ class vboMeshParticle002 : public sketchBaseScene {
         delete polyManagement;
         delete poly;
     }
+
+   public:
+    vboMeshParticle002(string name) { sceneName = name; };
 
    private:
     ofVboMesh *vboMesh;

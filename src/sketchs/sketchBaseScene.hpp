@@ -24,6 +24,8 @@ class sketchBaseScene {
     inline void setRatio1(float _ratio) { ratio_1 = _ratio; }
     inline void setRatio2(float _ratio) { ratio_2 = _ratio; }
 
+    string sceneName;
+
    protected:
     float speed;
     float elementInterval;

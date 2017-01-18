@@ -14,6 +14,7 @@
 #include "sceneUnit.hpp"
 #include "sketchBaseScene.hpp"
 #include "dataReaderSceneParameters.hpp"
+#include "dataReaderSceneList.hpp"
 #include "ofxXmlSettings.h"
 
 class sceneManagement {
@@ -58,6 +59,9 @@ class sceneManagement {
         ofTranslate(ofGetWidth() / 2, ofGetHeight() / 2);
         cam.begin();
         scenes[index]->draw();
+        if (gui->getDrawAxis()) {
+            ofDrawAxis(100);
+        }
         cam.end();
         ofPopMatrix();
         ofSetColor(255);
@@ -76,18 +80,18 @@ class sceneManagement {
         gui->setRatio1(ratio_1[index]);
         gui->setRatio2(ratio_2[index]);
     }
-    void updateGuiParams(int index){
+    void updateGuiParams(int index) {
         speed[index] = gui->getSpeed();
         elementInterval[index] = gui->getElementInterval();
         ratio_1[index] = gui->getRatio1();
         ratio_2[index] = gui->getRatio2();
     }
-    
 
     void saveXml(int index) {
         xml = new ofxXmlSettings();
-        string path = "xml/sceneParameters.xml";
-        xml->load(path);
+//        string path = "xml/sceneParameters.xml";
+//        xml->load(path);
+        xml->load(sceneList_path[index]);
         xml->pushTag("sceneParameters");
         xml->pushTag("scene", index);
         xml->setValue("speed", speed[index]);
@@ -96,27 +100,57 @@ class sceneManagement {
         xml->setValue("ratio_2", ratio_2[index]);
         xml->popTag();
         xml->popTag();
-        xml->save(path);
+        xml->save(sceneList_path[index]);
         delete xml;
         gui->saveCompleted();
         cout << "save completed !!  speed :" << speed[index] << endl;
     }
 
     sceneManagement() {
+        vector<sketchBaseScene *> tmp_scenes;
         unit = new sceneUnit();
-        scenes = unit->scenes;
+         tmp_scenes = unit->scenes;
+        //scenes = unit->scenes;
         delete unit;
 
-        sceneParams = new dataReaderSceneParameters();
-        sceneParams->loadXml("xml/sceneParameters.xml");
-        sceneTotal = sceneParams->sceneTotal;
-        sceneName = sceneParams->name;
-        speed = sceneParams->speed;
-        elementInterval = sceneParams->elementInterval;
-        ratio_1 = sceneParams->ratio_1;
-        ratio_2 = sceneParams->ratio_2;
-        cout << sceneName[0] << endl;
-        delete sceneParams;
+        sceneList = new dataReaderSceneList();
+        sceneList->loadXml("xml/sceneList.xml");
+        int sceneListNum = sceneList->sceneListNum;
+        cout << "sceneManagement " << sceneListNum << endl;
+
+        for (int i = 0; i < sceneListNum; i++) {
+            sceneParams = new dataReaderSceneParameters();
+            sceneParams->loadXml(sceneList->scene_path[i]);
+            for (int j = 0; j < sceneParams->name.size(); j++) {
+                for (int k = 0; k < tmp_scenes.size(); k++) {
+                    cout << sceneParams->name[j] << " : " << tmp_scenes[k]->sceneName << endl;
+                    if (sceneParams->name[j] == tmp_scenes[k]->sceneName) {
+                        sceneList_path.push_back(sceneList->scene_path[i]);
+                        scenes.push_back(tmp_scenes[k]);
+                        sceneName.push_back(sceneParams->name[j]);
+                        speed.push_back(sceneParams->speed[j]);
+                        elementInterval.push_back(sceneParams->elementInterval[j]);
+                        ratio_1.push_back(sceneParams->ratio_1[j]);
+                        ratio_2.push_back(sceneParams->ratio_2[j]);
+                        break;
+                        cout << "sceneName : " << scenes[k]->sceneName << endl;
+                    }
+                }
+                cout << "--------------" << endl;
+            }
+            delete sceneParams;
+        }
+        sceneTotal = scenes.size();
+
+        //        sceneParams = new dataReaderSceneParameters();
+        //        sceneParams->loadXml("xml/sceneParameters.xml");
+        //        sceneTotal = sceneParams->sceneTotal;
+        //        sceneName = sceneParams->name;
+        //        speed = sceneParams->speed;
+        //        elementInterval = sceneParams->elementInterval;
+        //        ratio_1 = sceneParams->ratio_1;
+        //        ratio_2 = sceneParams->ratio_2;
+        //        delete sceneParams;
     };
 
     vector<sketchBaseScene *> scenes;
@@ -125,11 +159,13 @@ class sceneManagement {
     guiManagement *gui;
     sceneUnit *unit;
     dataReaderSceneParameters *sceneParams;
+    dataReaderSceneList *sceneList;
     ofxXmlSettings *xml;
     ofEasyCam cam;
 
     int sceneTotal;
     vector<string> sceneName;
+    vector<string> sceneList_path;
     vector<float> speed;
     vector<float> elementInterval;
     vector<float> ratio_1;
