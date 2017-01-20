@@ -36,10 +36,15 @@ class sceneUnit {
         add(new polyPDFScene004("polyPDFScene004"));
         add(new polyPDFScene005("polyPDFScene005"));
         add(new polyPDFScene006("polyPDFScene006"));
+        add(new polyPDFScene007("polyPDFScene007"));
+        add(new polyPDFScene008("polyPDFScene008"));
+        add(new polyPDFScene009("polyPDFScene009"));
+        add(new polyPDFScene010("polyPDFScene010"));
         add(new simplePDFVerticesExample001("simplePDFVerticesExample001"));
         add(new simplePDFVerticesExample002("simplePDFVerticesExample002"));
         add(new simplePDFVerticesExample003("simplePDFVerticesExample003"));
         add(new simplePDFVerticesExample004("simplePDFVerticesExample004"));
+        add(new stringPDFExample001("stringPDFExample001"));
         
         //---------------------------------------
         // vbo / mesh Example
@@ -48,12 +53,14 @@ class sceneUnit {
         add(new vboExample001("vboExample001"));
         add(new vboExample002("vboExample002"));
         add(new vboMeshExample001("vboMeshExample001"));
+        add(new meshObjExample001("meshObjExample001"));
         
         //---------------------------------------
         // particle Example
         //---------------------------------------
         add(new vboMeshParticle001("vboMeshParticle001"));
         add(new vboMeshParticle002("vboMeshParticle002"));
+        add(new vboMeshParticle003("vboMeshParticle003"));
 }
 
     vector<sketchBaseScene *> scenes;

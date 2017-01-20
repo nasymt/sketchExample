@@ -205,7 +205,7 @@ class vboMeshExample001 : public sketchBaseScene {
 
     void end() { delete vboMesh; }
 
-public:
+   public:
     vboMeshExample001(string name) { sceneName = name; };
 
    private:
@@ -214,6 +214,43 @@ public:
     int width = 500;
     int depth = 100;
     ofVboMesh *vboMesh;
+};
+
+//====================================================================
+//
+// meshObjExample001 [simple vboMesh Example]
+//
+//====================================================================
+class meshObjExample001 : public sketchBaseScene {
+    void begin() {
+        mesh = new ofMesh();
+        mesh->load("obj/lofi-bunny.ply");
+        for(int i=0;i<mesh->getNumVertices();i++){
+            vertices.push_back(mesh->getVertex(i));
+            //ofLogNotice("vertices")<<vertices[i].x << " : " <<vertices[i].y << " : " << vertices[i].z ;
+        }
+    }
+
+    void update() {
+    }
+
+    void draw() {
+        glPointSize(2);
+        ofSetColor(ofColor::white);
+        mesh->drawVertices();
+    }
+
+    void end() {
+        delete mesh;
+    }
+
+   public:
+    meshObjExample001(string name) { sceneName = name; };
+
+   private:
+    ofMesh *mesh;
+    vector<ofVec3f> vertices;
+
 };
 
 #endif /* meshExample_hpp */

@@ -107,7 +107,6 @@
 		EA888D10F05E01DE355BEBC7 /* res_pixmap.c in Sources */ = {isa = PBXBuildFile; fileRef = 78D7A61B9E34573B1C8119BD /* res_pixmap.c */; };
 		EBCE37AF4F6A69DEA5E151C8 /* crypt_md5.c in Sources */ = {isa = PBXBuildFile; fileRef = 03DA02032CAF4B865E127B1E /* crypt_md5.c */; };
 		F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */; };
-		F51E71F4AFEC9C05C47E358D /* easingManagement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6ACD3B4714D8B59ADD8171A1 /* easingManagement.cpp */; };
 		FA39C37A8DA0EB3071DA4655 /* draw_edge.c in Sources */ = {isa = PBXBuildFile; fileRef = A4D7379CF379CE636EE5FBE1 /* draw_edge.c */; };
 		FF4895C79C9600285D458971 /* res_store.c in Sources */ = {isa = PBXBuildFile; fileRef = 72A66E15D76705EA077895CB /* res_store.c */; };
 		FFB82151009B7F310D131622 /* pdf_pattern.c in Sources */ = {isa = PBXBuildFile; fileRef = 065D5A46952F3D1EFC9D8111 /* pdf_pattern.c */; };
@@ -203,7 +202,6 @@
 		628C688389AD400C6FA1731D /* res_font.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = res_font.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/fitz/res_font.c; sourceTree = SOURCE_ROOT; };
 		63D6DDE113F1EFF47D9B6944 /* pdf_page.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = pdf_page.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/pdf/pdf_page.c; sourceTree = SOURCE_ROOT; };
 		66891EB6156E669AB38767B5 /* draw_mesh.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = draw_mesh.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/draw/draw_mesh.c; sourceTree = SOURCE_ROOT; };
-		6ACD3B4714D8B59ADD8171A1 /* easingManagement.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = easingManagement.cpp; path = ../../../addons/ofxEasing/src/easingManagement.cpp; sourceTree = SOURCE_ROOT; };
 		72A66E15D76705EA077895CB /* res_store.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = res_store.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/fitz/res_store.c; sourceTree = SOURCE_ROOT; };
 		738E174D329EAC9D46B5CDF4 /* dev_trace.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = dev_trace.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/fitz/dev_trace.c; sourceTree = SOURCE_ROOT; };
 		76E266F6F139A27E5AE485E1 /* pdf_object.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = pdf_object.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/pdf/pdf_object.c; sourceTree = SOURCE_ROOT; };
@@ -271,7 +269,6 @@
 		D322CD43023AC4979EFBA546 /* pdf_interpret.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = pdf_interpret.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/pdf/pdf_interpret.c; sourceTree = SOURCE_ROOT; };
 		D7F5ABC8C53A119E57F6BC0C /* pdf_metrics.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = pdf_metrics.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/pdf/pdf_metrics.c; sourceTree = SOURCE_ROOT; };
 		DA66A36338186F9E725D717E /* pdf_encoding.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = pdf_encoding.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/pdf/pdf_encoding.c; sourceTree = SOURCE_ROOT; };
-		DEDE15FB9D6C35E701579322 /* easingManagement.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = easingManagement.hpp; path = ../../../addons/ofxEasing/src/easingManagement.hpp; sourceTree = SOURCE_ROOT; };
 		DF2A429EC1049CC5CA3E0C8A /* filt_predict.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = filt_predict.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/fitz/filt_predict.c; sourceTree = SOURCE_ROOT; };
 		E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxPanel.cpp; path = ../../../addons/ofxGui/src/ofxPanel.cpp; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -660,8 +657,6 @@
 			isa = PBXGroup;
 			children = (
 				528CB0EB22F0A199A5F479D5 /* easing_terms_of_use.html */,
-				6ACD3B4714D8B59ADD8171A1 /* easingManagement.cpp */,
-				DEDE15FB9D6C35E701579322 /* easingManagement.hpp */,
 				FF2B018E24837032A4878576 /* ofxEasing.h */,
 			);
 			name = src;
@@ -758,7 +753,6 @@
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				C2AA9075A6574F5F081F3B36 /* PolyManagementPDFVertices.cpp in Sources */,
 				08C23182D394C53F6ECE6CCC /* easing_terms_of_use.html in Sources */,
-				F51E71F4AFEC9C05C47E358D /* easingManagement.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,

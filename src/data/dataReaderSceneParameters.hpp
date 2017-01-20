@@ -26,6 +26,9 @@ class dataReaderSceneParameters {
             elementInterval.push_back(xml->getValue("scene:elementInterval", 1.0, i));
             ratio_1.push_back(xml->getValue("scene:ratio_1", 1.0, i));
             ratio_2.push_back(xml->getValue("scene:ratio_2", 1.0, i));
+            bTracing.push_back(xml->getValue("scene:tracing", 0, i));
+            tracing_resample.push_back(xml->getValue("scene:tracing_resample", 0, i));
+            tracing_path.push_back(xml->getValue("scene:tracing_path", "", i));
         }
         xml->popTag();
         delete xml;
@@ -37,6 +40,9 @@ class dataReaderSceneParameters {
     vector<float> elementInterval;
     vector<float> ratio_1;
     vector<float> ratio_2;
+    vector<bool> bTracing;
+    vector<int> tracing_resample;
+    vector<string> tracing_path;
 
    private:
     ofxXmlSettings *xml;

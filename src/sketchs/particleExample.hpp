@@ -13,6 +13,7 @@
 #include "sketchBaseScene.hpp"
 #include "ofxPDF.h"
 #include "PolyManagementPDFVertices.hpp"
+#include "simplePDFVertices.hpp"
 #include "simpleCounter.hpp"
 
 //====================================================================
@@ -204,6 +205,76 @@ class vboMeshParticle002 : public sketchBaseScene {
     ofPolyline *poly_small;
     int resample;
     int circleNum;
+};
+
+//====================================================================
+//
+// vboMeshParticle003 [simple vboMesh Example]
+//
+//====================================================================
+class vboMeshParticle003 : public sketchBaseScene {
+    void begin() {
+        vboMesh = new ofVboMesh();
+        counter = new simpleCounter();
+        simplePDF = new simplePDFVertices();
+        resample = 3000;
+        circleNum = 10;
+        particle_resolution = 5;
+        counter->setup(0, particle_resolution - 1, speed);
+        simplePDF->setup(tracing_path, tracing_resample);
+        sphere_resolution = 50;
+
+        if (vertices.size()) vertices.clear();
+        for (int i = 0; i < sphere_resolution; i++) {
+            vector<ofPoint> tmp_vert = simplePDF->getVertices();
+            tmp_vert = simplePDF->getRotateVertices(360 / sphere_resolution * i, 0, 0);
+            vertices.push_back(tmp_vert);
+            
+            tmp_vert.clear();
+            tmp_vert = simplePDF->getRotateVertices(0,360 / sphere_resolution * i , 0);
+            vertices.push_back(tmp_vert);
+        }
+    }
+
+    void update() {
+        counter->update();
+        counter->changeCountAmount(speed);
+
+        vboMesh->clear();
+        vboMesh->setMode(OF_PRIMITIVE_POINTS);
+        for (int i = 0; i < sphere_resolution; i++) {
+            for (int j = 0; j < vertices[i].size(); j++) {
+                if (j % particle_resolution == counter->getValue()) {
+                    vboMesh->addVertex(ofVec3f(vertices[i][j]));
+                }
+            }
+        }
+    }
+
+    void draw() {
+        ofSetColor(255);
+        vboMesh->draw();
+    }
+
+    void end() {
+        delete vboMesh;
+        delete counter;
+        delete simplePDF;
+    }
+
+   public:
+    vboMeshParticle003(string name) { sceneName = name; };
+
+   private:
+    vector<vector<ofPoint>> vertices;
+    ofVboMesh *vboMesh;
+    simplePDFVertices *simplePDF;
+
+    simpleCounter *counter;
+    int resample;
+    int circleNum;
+    int sphere_resolution;
+    int particle_resolution;
 };
 
 #endif /* particleExample_hpp */

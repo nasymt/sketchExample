@@ -28,6 +28,8 @@ class sceneManagement {
         scenes[index]->setElementInterval(elementInterval[index]);
         scenes[index]->setRatio1(ratio_1[index]);
         scenes[index]->setRatio2(ratio_2[index]);
+        scenes[index]->setTracingResample(tracing_resample[index]);
+        scenes[index]->setTracingPath(tracing_path[index]);
 
         scenes[index]->setup();
     }
@@ -47,10 +49,11 @@ class sceneManagement {
         if (gui->isSaveAvailable()) {
             saveXml(index);
         }
-        scenes[index]->setSpeed(gui->getSpeed());
-        scenes[index]->setElementInterval(gui->getElementInterval());
-        scenes[index]->setRatio1(gui->getRatio1());
-        scenes[index]->setRatio2(gui->getRatio2());
+//        scenes[index]->setSpeed(gui->getSpeed());
+//        scenes[index]->setElementInterval(gui->getElementInterval());
+//        scenes[index]->setRatio1(gui->getRatio1());
+//        scenes[index]->setRatio2(gui->getRatio2());
+        updateSceneParams(index);
         scenes[index]->update();
     }
     void draw(int index) {
@@ -79,12 +82,21 @@ class sceneManagement {
         gui->setElementInterval(elementInterval[index]);
         gui->setRatio1(ratio_1[index]);
         gui->setRatio2(ratio_2[index]);
+//        gui->setTracingResample(tracing_resample[index]);
+//        gui->setTracingPath(tracing_path[index]);
     }
     void updateGuiParams(int index) {
         speed[index] = gui->getSpeed();
         elementInterval[index] = gui->getElementInterval();
         ratio_1[index] = gui->getRatio1();
         ratio_2[index] = gui->getRatio2();
+    }
+    
+    void updateSceneParams(int index){
+        scenes[index]->setSpeed(gui->getSpeed());
+        scenes[index]->setElementInterval(gui->getElementInterval());
+        scenes[index]->setRatio1(gui->getRatio1());
+        scenes[index]->setRatio2(gui->getRatio2());
     }
 
     void saveXml(int index) {
@@ -132,8 +144,11 @@ class sceneManagement {
                         elementInterval.push_back(sceneParams->elementInterval[j]);
                         ratio_1.push_back(sceneParams->ratio_1[j]);
                         ratio_2.push_back(sceneParams->ratio_2[j]);
+                        bTracing.push_back(sceneParams->bTracing[j]);
+                        tracing_resample.push_back(sceneParams->tracing_resample[j]);
+                        tracing_path.push_back(sceneParams->tracing_path[j]);
+//                        cout << "sceneName : " << scenes[k]->sceneName << endl;
                         break;
-                        cout << "sceneName : " << scenes[k]->sceneName << endl;
                     }
                 }
                 cout << "--------------" << endl;
@@ -170,6 +185,9 @@ class sceneManagement {
     vector<float> elementInterval;
     vector<float> ratio_1;
     vector<float> ratio_2;
+    vector<bool> bTracing;
+    vector<int> tracing_resample;
+    vector<string> tracing_path;
 };
 
 #endif /* sceneManagement_hpp */

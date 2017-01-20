@@ -20,6 +20,7 @@ class simplePDFVertices {
         pdf = new ofxPDF();
         polyPDF = new PolyManagementPDFVertices();
         qManagement = new QuaternionManagement();
+        translatePosition = ofVec3f(0,0,0);
         pdf->load(path);
         polyPDF->add(path, resample);
         points = polyPDF->getVertices();
@@ -32,15 +33,36 @@ class simplePDFVertices {
         float quaternionAngle = qManagement->getQuaternionAngle(rotX, rotY, rotZ);
         ofVec3f quaternionAxis = qManagement->getQuaternionAxis(rotX, rotY, rotZ);
         for (int i = 0; i < vertices.size(); i++) {
-            ofPoint pos = qManagement->getPosition(ofPoint(polyPDF->getVertices()[0][i].x, polyPDF->getVertices()[0][i].y, 0), quaternionAngle, quaternionAxis);
+            ofPoint pos = qManagement->getPosition(ofPoint(polyPDF->getVertices()[0][i].x + translatePosition.x, polyPDF->getVertices()[0][i].y + translatePosition.y, translatePosition.z), quaternionAngle, quaternionAxis);
             vertices[i] = pos;
         }
     }
     void rotate(int index, float rotX, float rotY, float rotZ) {
         float quaternionAngle = qManagement->getQuaternionAngle(rotX, rotY, rotZ);
         ofVec3f quaternionAxis = qManagement->getQuaternionAxis(rotX, rotY, rotZ);
-        ofPoint pos = qManagement->getPosition(ofPoint(vertices[index].x, vertices[index].y, 0), quaternionAngle, quaternionAxis);
+        ofPoint pos = qManagement->getPosition(ofPoint(vertices[index].x + translatePosition.x, vertices[index].y + translatePosition.y, translatePosition.z), quaternionAngle, quaternionAxis);
         vertices[index] = pos;
+    }
+    vector<ofPoint> getRotateVertices(float rotX,float rotY,float rotZ){
+        vector<ofPoint> tmp_vertices;
+        float quaternionAngle = qManagement->getQuaternionAngle(rotX, rotY, rotZ);
+        ofVec3f quaternionAxis = qManagement->getQuaternionAxis(rotX, rotY, rotZ);
+        for (int i = 0; i < vertices.size(); i++) {
+            ofPoint pos = qManagement->getPosition(ofPoint(polyPDF->getVertices()[0][i].x + translatePosition.x, polyPDF->getVertices()[0][i].y + translatePosition.y, translatePosition.z), quaternionAngle, quaternionAxis);
+            tmp_vertices.push_back(pos);
+        }
+        return tmp_vertices;
+    }
+    ofPoint getRotateVertices(int index,float rotX,float rotY,float rotZ){
+        ofPoint tmp_vertices;
+        float quaternionAngle = qManagement->getQuaternionAngle(rotX, rotY, rotZ);
+        ofVec3f quaternionAxis = qManagement->getQuaternionAxis(rotX, rotY, rotZ);
+            ofPoint pos = qManagement->getPosition(ofPoint(polyPDF->getVertices()[0][index].x + translatePosition.x, polyPDF->getVertices()[0][index].y + translatePosition.y, translatePosition.z), quaternionAngle, quaternionAxis);
+        return pos;
+    }
+    
+    void setTranslatePosition(ofVec3f position){
+        translatePosition = position;
     }
 
     void resize(float ratio) {
@@ -68,6 +90,7 @@ class simplePDFVertices {
     //    vector<ofVec2f> vertices;
     vector<ofPoint> vertices;
     vector<vector<ofVec2f>> points;
+    ofVec3f translatePosition;
 };
 
 #endif /* simplePDFVertices_hpp */
