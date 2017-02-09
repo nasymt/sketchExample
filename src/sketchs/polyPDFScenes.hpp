@@ -724,16 +724,18 @@ class polyPDFScene010 : public sketchBaseScene {
         simplePDF = new simplePDFVertices();
         //        poly = new ofPolyline();
         simplePDF->setup(tracing_path, tracing_resample);
-        layer_num = 10;
+        layer_num = 100;
         ofBackground(255);
         if (poly.size()) poly.clear();
         if (vertices.size()) vertices.clear();
         if (noise.size()) noise.clear();
+        if (scale.size()) scale.clear();
         vertices = simplePDF->getVertices();
         for (int i = 0; i < vertices.size(); i++) {
             seed_x.push_back((int)ofRandom(200));
             seed_y.push_back((int)ofRandom(200));
             noise.push_back(ofPoint(ofNoise(i / 100 + 1.11111) * 100 - 100, ofNoise(i / 100 + 1.11111) * 100 - 100, 0));
+            scale.push_back(ofNoise(i+ 1.0));
             //            cout << noise[i].x << " : " << noise[i].y << ofNoise(i * 10 + ofGetElapsedTimef()) << " : " << ofGetElapsedTimef() <<  endl;
             // cout << "noise : " << i <<  " : " << noise[i] << endl;
         }
@@ -745,13 +747,14 @@ class polyPDFScene010 : public sketchBaseScene {
 
     void update() {
         for (int i = 0; i < noise.size(); i++) {
-            noise[i] *= elementInterval;
+            noise[i] = ofPoint(ofNoise(i * elementInterval / 20 + ofGetElapsedTimef() / 50 * speed), ofNoise((i * elementInterval) / 20 + 1 + ofGetElapsedTimef() / 50 * speed), 0);
         }
+        amount = 100 * ratio_1;
         //        cout << "noise : " << ofNoise(ofGetElapsedTimef()) << endl;
     }
 
     void draw() {
-        ofSetColor(0, 100);
+        ofSetColor(0, 200);
 
         for (int i = 0; i < layer_num; i++) {
             poly[i].begin();
@@ -759,11 +762,12 @@ class polyPDFScene010 : public sketchBaseScene {
                 //                ofPoint tmp_vertices = ofPoint(vertices[j] / layer_num * i * ratio_1 + noise[j]);
                 ofPoint tmp_vertices = ofPoint(vertices[j] / layer_num * i * ratio_1);
                 // poly[i].addVertex(ofPoint(tmp_vertices.x + ofNoise(i + 1.111 * elementInterval) * 100 - 100, tmp_vertices.y + ofNoise(i + 1.111 * elementInterval) * 100 - 100, tmp_vertices.z));
-                noise[i] = ofPoint(ofNoise(j / 200 * elementInterval, j / 180 * elementInterval), ofNoise(j / 180 * elementInterval, j / 200 * elementInterval), 0);
 
-                poly[i].addVertex(ofPoint(tmp_vertices.x + noise[i].x * 100 - 100, tmp_vertices.y + noise[i].y * 100 - 100, tmp_vertices.z));
-
-                //                ofDrawCircle(tmp_vertices.x,tmp_vertices.y,5,5);
+                poly[i].addVertex(ofPoint(tmp_vertices.x + noise[j].x * amount - amount / 2, tmp_vertices.y + noise[j].y * amount - amount / 2, tmp_vertices.z));
+                if (j == vertices.size() - 1) {
+                    tmp_vertices = ofPoint(vertices[0] / layer_num * i * ratio_1);
+                    poly[i].addVertex(ofPoint(tmp_vertices.x + noise[0].x * amount - amount / 2, tmp_vertices.y + noise[0].y * amount - amount / 2, tmp_vertices.z));
+                }
             }
             poly[i].end();
             poly[i].draw();
@@ -786,8 +790,10 @@ class polyPDFScene010 : public sketchBaseScene {
     simplePDFVertices *simplePDF;
     vector<ofPoint> vertices;
     vector<ofPoint> noise;
+    vector<float> scale;
     vector<int> seed_x;
     vector<int> seed_y;
+    float amount;
 };
 
 //====================================================================

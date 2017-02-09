@@ -102,8 +102,8 @@
     </scene>
     <scene>
         <name>polyPDFScene010</name>
-        <speed>1.000000000</speed>
-        <elementInterval>3.500000000</elementInterval>
+        <speed>6.949999809</speed>
+        <elementInterval>0.299999982</elementInterval>
         <ratio_1>1.949999928</ratio_1>
         <ratio_2>1.000000000</ratio_2>
         <params_tracing>------------------------------------------------</params_tracing>

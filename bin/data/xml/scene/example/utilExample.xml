@@ -1,0 +1,13 @@
+<sceneParameters>
+    <scene>
+        <name>noiseExample001</name>
+        <speed>1.0</speed>
+        <elementInterval>1.0</elementInterval>
+        <ratio_1>1.0</ratio_1>
+        <ratio_2>1.0</ratio_2>
+        <params_tracing>------------------------------------------------</params_tracing>
+        <tracing>0</tracing>
+        <tracing_resample>1000</tracing_resample>
+        <tracing_path>pdf/example_ellipse_400px.pdf</tracing_path>
+    </scene>
+</sceneParameters>

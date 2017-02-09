@@ -16,6 +16,7 @@
 #include "polyPDFScenes.hpp"
 #include "meshExample.hpp"
 #include "particleExample.hpp"
+#include "utilExample.hpp"
 
 class sceneUnit {
    public:
@@ -26,6 +27,8 @@ class sceneUnit {
         add(new polylineExample001("polylineExample001"));
         add(new polylineExample002("polylineExample002"));
         add(new polylineExample003("polylineExample003"));
+        add(new polylineExample004_bezier("polylineExample004_bezier"));
+        add(new polylineExample005_curveTo("polylineExample005_curveTo"));
         
         //---------------------------------------
         // polyPDF Example
@@ -61,6 +64,12 @@ class sceneUnit {
         add(new vboMeshParticle001("vboMeshParticle001"));
         add(new vboMeshParticle002("vboMeshParticle002"));
         add(new vboMeshParticle003("vboMeshParticle003"));
+        
+        
+        //---------------------------------------
+        // noise Example
+        //---------------------------------------
+        add(new noiseExample001("noiseExample001"));
 }
 
     vector<sketchBaseScene *> scenes;

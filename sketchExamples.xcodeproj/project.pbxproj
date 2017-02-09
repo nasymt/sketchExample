@@ -236,6 +236,7 @@
 		969171FB1E2DDF2300356D9E /* easingManagement.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = easingManagement.hpp; path = management/easingManagement.hpp; sourceTree = "<group>"; };
 		969171FD1E2DE2FB00356D9E /* xml */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xml; path = bin/data/xml; sourceTree = "<group>"; };
 		969171FF1E2E5C1400356D9E /* dataReaderSceneList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = dataReaderSceneList.hpp; path = data/dataReaderSceneList.hpp; sourceTree = "<group>"; };
+		969172071E31ADC300356D9E /* utilExample.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = utilExample.hpp; path = sketchs/utilExample.hpp; sourceTree = "<group>"; };
 		99487133297C61B4779C29F0 /* sceneUnit.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = sceneUnit.hpp; path = src/sketchs/sceneUnit.hpp; sourceTree = SOURCE_ROOT; };
 		9C7C39EF1765BA6DA6C1D41C /* sketchBaseScene.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = sketchBaseScene.hpp; path = src/sketchs/sketchBaseScene.hpp; sourceTree = SOURCE_ROOT; };
 		9E26F07AECA2668E110D8E7E /* base_memory.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = base_memory.c; path = ../../../addons/ofxPDF/libs/mupdf/lib/fitz/base_memory.c; sourceTree = SOURCE_ROOT; };
@@ -531,6 +532,7 @@
 				7C4C631E47FD3E23B89733D1 /* polyPDFScenes.hpp */,
 				99487133297C61B4779C29F0 /* sceneUnit.hpp */,
 				9C7C39EF1765BA6DA6C1D41C /* sketchBaseScene.hpp */,
+				969172071E31ADC300356D9E /* utilExample.hpp */,
 			);
 			name = sketchs;
 			sourceTree = "<group>";

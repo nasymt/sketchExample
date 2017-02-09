@@ -1,18 +1,22 @@
 <sceneList>
     
-    <!--<scene>
+    <scene>
         <path>xml/scene/example/polylineExample.xml</path>
     </scene><!---->
     
-    <scene>
+    <!--<scene>
      <path>xml/scene/example/polyPDFExample.xml</path>
      </scene><!---->
     
+    <!--<scene>
+        <path>xml/scene/example/utilExample.xml</path>
+    </scene><!---->
+
     <!--<scene>
      <path>xml/scene/example/meshExample.xml</path>
      </scene><!---->
     
     <scene>
         <path>xml/scene/sceneParameters.xml</path>
-    </scene>
+    </scene><!---->
 </sceneList>
